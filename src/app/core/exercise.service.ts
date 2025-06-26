@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ExerciseDTO } from '../shared/models';
+import { ExerciseDTO } from '../shared/models/models';
 import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })

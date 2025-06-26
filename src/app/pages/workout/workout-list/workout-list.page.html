@@ -1,0 +1,27 @@
+<section class="p-8">
+  <h1 class="text-3xl font-bold mb-6">Mes entraînements</h1>
+
+  <ng-container *ngIf="workouts$ | async as workouts; else loading">
+    <ng-container *ngIf="workouts.length > 0; else noWorkouts">
+      <ul class="grid gap-4">
+        <li *ngFor="let workout of workouts" class="p-4 bg-white shadow-md rounded-lg">
+          <div class="flex justify-between items-center">
+            <div>
+              <h2 class="text-xl font-semibold">{{ workout.notes }}</h2>
+              <p class="text-sm text-gray-600">Durée : {{ workout.durationMinutes }} minutes</p>
+            </div>
+            <!-- Boutons pour modifier/supprimer à ajouter plus tard -->
+          </div>
+        </li>
+      </ul>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #loading>
+    <p class="text-gray-500 italic">Chargement des entraînements...</p>
+  </ng-template>
+
+  <ng-template #noWorkouts>
+    <p class="text-gray-500 italic">Aucun entraînement pour le moment.</p>
+  </ng-template>
+</section>

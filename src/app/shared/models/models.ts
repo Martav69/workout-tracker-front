@@ -1,8 +1,8 @@
 export interface WorkoutDTO {
   id?: number;
+  notes?: string;
   date: string;
   durationMinutes: number;
-  notes?: string;
   exercises: ExerciseDTO[];
 }
 
