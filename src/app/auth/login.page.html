@@ -1,0 +1,35 @@
+<div class="h-screen flex items-center justify-center bg-background text-foreground">
+  <form #f="ngForm"
+        (ngSubmit)="onSubmit(f)"
+        class="space-y-4 bg-card p-8 rounded-lg shadow-md w-full max-w-sm">
+
+    <h1 class="text-xl font-semibold mb-4 text-center">Connexion</h1>
+
+    <input
+      name="username"
+      placeholder="Nom d'utilisateur"
+      [(ngModel)]="formData.username"
+      required
+      class="w-full px-4 py-2 border rounded-md"
+    />
+
+    <input
+      type="password"
+      name="password"
+      placeholder="Mot de passe"
+      [(ngModel)]="formData.password"
+      required
+      class="w-full px-4 py-2 border rounded-md"
+    />
+
+    <button
+      type="submit"
+      hlm
+      variant="outline"
+      [disabled]="f.invalid"
+      class="btn w-full"
+    >
+      Se connecter
+    </button>
+  </form>
+</div>
