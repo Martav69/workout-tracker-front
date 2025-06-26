@@ -1,0 +1,22 @@
+::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+input:focus {
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.4); // purple-400 ring fallback
+}
+
+form {
+  animation: fadeIn 0.8s ease-in-out both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

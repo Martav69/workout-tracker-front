@@ -1,35 +1,35 @@
-<div class="h-screen flex items-center justify-center bg-background text-foreground">
-  <form #f="ngForm"
-        (ngSubmit)="onSubmit(f)"
-        class="space-y-4 bg-card p-8 rounded-lg shadow-md w-full max-w-sm">
 
-    <h1 class="text-xl font-semibold mb-4 text-center">Connexion</h1>
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-900">
+  <div class="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl shadow-xl p-8 w-full max-w-md text-white">
+    
+    <h1 class="text-3xl font-bold text-center mb-6">Connexion</h1>
 
-    <input
-      name="username"
-      placeholder="Nom d'utilisateur"
-      [(ngModel)]="formData.username"
-      required
-      class="w-full px-4 py-2 border rounded-md"
-    />
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="space-y-5">
+      <input
+        type="text"
+        name="username"
+        [(ngModel)]="formData.username"
+        placeholder="Nom d'utilisateur"
+        required
+        class="w-full p-3 rounded-lg bg-white/10 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400"
+      />
 
-    <input
-      type="password"
-      name="password"
-      placeholder="Mot de passe"
-      [(ngModel)]="formData.password"
-      required
-      class="w-full px-4 py-2 border rounded-md"
-    />
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="formData.password"
+        placeholder="Mot de passe"
+        required
+        class="w-full p-3 rounded-lg bg-white/10 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400"
+      />
 
-    <button
-      type="submit"
-      hlm
-      variant="outline"
-      [disabled]="f.invalid"
-      class="btn w-full"
-    >
-      Se connecter
-    </button>
-  </form>
+      <button
+        type="submit"
+        [disabled]="f.invalid"
+        class="w-full bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 rounded-lg transition duration-300 disabled:opacity-50"
+      >
+        Se connecter
+      </button>
+    </form>
+  </div>
 </div>

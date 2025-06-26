@@ -1,0 +1,11 @@
+.glass-card {
+  @apply bg-white/20 backdrop-blur-md border border-white/30 rounded-lg p-6 shadow-lg;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  transform: translateY(30px);
+}
+
+// Animation in SCSS
+.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
