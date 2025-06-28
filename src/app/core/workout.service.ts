@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class WorkoutService {
-  private readonly API = `${environment.apiUrl}workouts`;
+  private readonly API = `${environment.apiUrl}/workouts`;
 
   constructor(private http: HttpClient) {}
 
