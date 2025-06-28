@@ -1,0 +1,31 @@
+<div class="container">
+  <!-- Stepper -->
+  <div class="stepper">
+    <span class="step active">Étape 1</span>
+    <span class="divider active"></span>
+    <span class="step">Étape 2</span>
+  </div>
+
+  <h2>Créer une nouvelle séance</h2>
+  <form [formGroup]="form" (ngSubmit)="onNext()">
+    <label>Nom</label>
+    <input formControlName="name" class="input" />
+
+    <label>Date</label>
+    <input type="date" formControlName="date" class="input" />
+
+    <label>Durée (min)</label>
+    <input type="number" formControlName="durationMinutes" class="input" />
+
+    <label>Notes</label>
+    <textarea formControlName="notes" class="input"></textarea>
+
+    <button
+      type="submit"
+      class="btn-primary"
+      [disabled]="form.invalid"
+    >
+      Suivant →
+    </button>
+  </form>
+</div>

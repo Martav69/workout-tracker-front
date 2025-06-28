@@ -14,6 +14,18 @@ export const routes: Routes = [
     path: 'workouts',
     loadComponent: () =>
       import('./pages/workout/workout-list/workout-list.page').then(m => m.WorkoutListPage), canActivate:[AuthGuard] 
-  }
+  },
+  {
+    path: 'workouts/create',
+    loadComponent: () =>
+      import('./pages/workout/workout-create/step1/workout-create-step1/workout-create-step1.component')
+        .then(m => m.WorkoutCreateStep1Component)
+  },
+  {
+    path: 'workouts/:id/exercises',
+    loadComponent: () =>
+      import('./pages/workout/workout-create/step2/workout-create-step2/workout-create-step2.component')
+        .then(m => m.WorkoutCreateStep2Component)
+  },
 
 ];

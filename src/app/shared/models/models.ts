@@ -1,5 +1,6 @@
 export interface WorkoutDTO {
   id?: number;
+  name: string;
   notes?: string;
   date: string;
   durationMinutes: number;
