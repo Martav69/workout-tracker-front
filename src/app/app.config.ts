@@ -1,13 +1,11 @@
-import { ApplicationConfig, importProvidersFrom, inject, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withEnabledBlockingInitialNavigation } from '@angular/router';
 
 import { routes } from './app.routes';
-import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { TokenInterceptor } from './core/token-interceptor.service';
-import { AuthService } from './core/auth.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
@@ -15,7 +13,11 @@ export const appConfig: ApplicationConfig = {
   provideAnimations(),
   importProvidersFrom(FormsModule),
   provideHttpClient(withInterceptorsFromDi()),
-  TokenInterceptor
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true,
+  }
 
 ]
 };
