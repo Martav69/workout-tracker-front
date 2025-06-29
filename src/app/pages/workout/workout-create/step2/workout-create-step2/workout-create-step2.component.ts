@@ -4,11 +4,12 @@ import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } fr
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExerciseService } from '../../../../../core/exercise.service';
 import { forkJoin } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'app-workout-create-step2',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './workout-create-step2.component.html',
   styleUrls: ['./workout-create-step2.component.scss']
 })

@@ -27,5 +27,12 @@ export const routes: Routes = [
       import('./pages/workout/workout-create/step2/workout-create-step2/workout-create-step2.component')
         .then(m => m.WorkoutCreateStep2Component)
   },
+  {
+  path: 'workouts/:id',
+  loadComponent: () =>
+    import('./pages/workout/workout-detail/workout-detail.component')
+      .then(m => m.WorkoutDetailComponent)
+}
+
 
 ];

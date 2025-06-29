@@ -1,24 +1,36 @@
 <section class="p-8">
   <h1 class="text-3xl font-bold mb-6">Mes entraînements</h1>
 
+  <!-- on stocke la valeur émise dans "workouts" ou on tombe dans #loading -->
   <ng-container *ngIf="workouts$ | async as workouts; else loading">
-    <ng-container *ngIf="workouts.length > 0; else noWorkouts">
-      <ul class="grid gap-4">
-        <li *ngFor="let workout of workouts" class="p-4 bg-white shadow-md rounded-lg">
-          <div class="flex justify-between items-center">
-            <div>
-              <h2 class="text-xl font-semibold">{{ workout.notes }}</h2>
-              <p class="text-sm text-gray-600">Durée : {{ workout.durationMinutes }} minutes</p>
-            </div>
-            <!-- Boutons pour modifier/supprimer à ajouter plus tard -->
+    
+    <!-- si la liste n’est pas vide on affiche, sinon #noWorkouts -->
+    <ul *ngIf="workouts.length > 0; else noWorkouts" class="grid gap-4">
+      <li
+        *ngFor="let workout of workouts; trackBy: trackByWorkoutId"
+        class="p-4 bg-white shadow-md rounded-lg"
+      >
+        <a
+          [routerLink]="['/workouts', workout.id]"
+          class="flex justify-between items-center hover:underline"
+        >
+          <div>
+            <h2 class="text-xl font-semibold">{{ workout.name }}</h2>
+            <p class="text-sm text-gray-600">
+              Durée : {{ workout.durationMinutes }} minutes
+            </p>
           </div>
-        </li>
-      </ul>
-    </ng-container>
+          <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor">
+            <path d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </li>
+    </ul>
+
   </ng-container>
 
   <ng-template #loading>
-    <p class="text-gray-500 italic">Chargement des entraînements...</p>
+    <p class="text-gray-500 italic">Chargement des entraînements…</p>
   </ng-template>
 
   <ng-template #noWorkouts>
