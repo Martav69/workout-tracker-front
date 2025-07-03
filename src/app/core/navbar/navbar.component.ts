@@ -2,11 +2,13 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
+import { HlmButtonModule } from '@spartan-ng/helm/button';
+import { HlmAvatarModule } from '@spartan-ng/helm/avatar';
 
 @Component({
   standalone: true,
   selector: 'app-navbar',
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink, RouterLinkActive, HlmButtonModule, HlmAvatarModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
@@ -18,6 +20,10 @@ export class NavbarComponent {
 
     get user() {
     return this.auth.user;
+  }
+
+  isHomeRoute() {
+    return this.router.url === '/';
   }
 
   logout() {

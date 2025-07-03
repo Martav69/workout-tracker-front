@@ -30,4 +30,8 @@ export class ExerciseService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API}/${id}`);
   }
+
+  partialUpdate(id: number, updates: Partial<ExerciseDTO>): Observable<ExerciseDTO> {
+    return this.http.patch<ExerciseDTO>(`${this.API}/${id}`, updates);
+  }
 }

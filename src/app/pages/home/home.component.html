@@ -1,30 +1,51 @@
-<section class="min-h-screen bg-gradient-to-br from-indigo-800 via-purple-900 to-indigo-800 flex flex-col">
-  <nav class="p-6 flex justify-between items-center text-white">
-    <h2 class="text-2xl font-bold">Workout Tracker</h2>
-    <a routerLink="/login" class="px-4 py-2 bg-white/20 rounded-lg hover:bg-white/30 transition">Connexion</a>
-  </nav>
+<main class="min-h-screen flex flex-col bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white">
+  <!-- Header -->
+  <header class="w-full flex items-center justify-between px-6 py-4 border-b border-gray-800 bg-gray-950/90 sticky top-0 z-20 backdrop-blur-md">
+    <a routerLink="/" class="flex items-center gap-2 group" aria-label="Accueil Workout Tracker">
+      <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-tr from-blue-600 to-violet-600 text-white font-bold text-xl shadow-lg">WT</div>
+      <span class="text-2xl font-extrabold tracking-tight text-white group-hover:text-blue-400 transition-colors">Workout Tracker</span>
+    </a>
+    <nav aria-label="Navigation principale">
+      <a routerLink="/login" class="px-5 py-2 rounded-lg font-semibold shadow-sm bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-2 focus-visible:ring-blue-400 focus:outline-none transition" aria-label="Connexion">Connexion</a>
+    </nav>
+  </header>
 
-  <div class="flex flex-1 flex-col justify-center items-center text-center px-6">
-    <h1 class="text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg mb-4">Atteignez vos Objectifs 🏋️</h1>
-    <p class="text-lg text-white/80 mb-8 max-w-2xl">Suivi intelligent de vos entraînements pour progresser chaque jour.</p>
-    <a routerLink="/login" class="bg-white text-indigo-800 font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition duration-300">Commencer</a>
-  </div>
-</section>
+  <!-- Hero Section -->
+  <section class="flex-1 flex flex-col justify-center items-center text-center px-6 py-16 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
+    <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">
+      Atteignez vos <span class="text-blue-400">Objectifs</span>
+      <span class="inline-block animate-bounce ml-2" aria-hidden="true">🏋️‍♂️</span>
+    </h1>
+    <p class="text-lg md:text-2xl text-gray-300 mb-10 max-w-2xl">
+      Suivi intelligent de vos entraînements pour progresser chaque jour. Simple, rapide, et motivant.
+    </p>
+    <a routerLink="/login" class="px-10 py-4 rounded-full shadow-xl hover:shadow-2xl transition text-lg font-bold bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-2 focus-visible:ring-blue-400 focus:outline-none" aria-label="Commencer à suivre mes entraînements">Commencer</a>
+  </section>
 
-<section class="py-20 bg-gray-100">
-  <h2 class="text-3xl font-bold text-center mb-10">Fonctionnalités</h2>
-  <div class="max-w-5xl mx-auto grid gap-8 md:grid-cols-3 px-6">
-    <div class="glass-card opacity-0" appScrollFade>
-      <h3 class="text-xl font-semibold mb-2">Planification</h3>
-      <p>Créez vos séances et planifiez vos objectifs facilement.</p>
+  <!-- Features Section -->
+  <section class="py-20 bg-gray-900 border-t border-gray-800">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white">Fonctionnalités</h2>
+    <div class="max-w-6xl mx-auto grid gap-10 md:grid-cols-3 px-6">
+      <div class="glass-card-dark border border-gray-800 rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-transform hover:scale-105" tabindex="0" aria-label="Planification">
+        <svg class="w-12 h-12 mb-4 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/></svg>
+        <h3 class="text-xl font-semibold mb-2 text-white">Planification</h3>
+        <p class="text-base text-gray-300">Créez vos séances et planifiez vos objectifs facilement.</p>
+      </div>
+      <div class="glass-card-dark border border-gray-800 rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-transform hover:scale-105" tabindex="0" aria-label="Suivi">
+        <svg class="w-12 h-12 mb-4 text-violet-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+        <h3 class="text-xl font-semibold mb-2 text-white">Suivi</h3>
+        <p class="text-base text-gray-300">Enregistrez vos performances et observez vos progrès.</p>
+      </div>
+      <div class="glass-card-dark border border-gray-800 rounded-xl shadow-lg p-8 flex flex-col items-center text-center transition-transform hover:scale-105" tabindex="0" aria-label="Insights">
+        <svg class="w-12 h-12 mb-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l3-3 4 4 5-5"/></svg>
+        <h3 class="text-xl font-semibold mb-2 text-white">Insights</h3>
+        <p class="text-base text-gray-300">Analyse intelligente de vos données pour optimiser vos entraînements.</p>
+      </div>
     </div>
-    <div class="glass-card opacity-0" appScrollFade>
-      <h3 class="text-xl font-semibold mb-2">Suivi</h3>
-      <p>Enregistrez vos performances et observez vos progrès.</p>
-    </div>
-    <div class="glass-card opacity-0" appScrollFade>
-      <h3 class="text-xl font-semibold mb-2">Insights</h3>
-      <p>Analyse intelligente de vos données pour optimiser vos entraînements.</p>
-    </div>
-  </div>
-</section>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 text-center text-gray-400 text-sm z-20 relative bg-gray-950 border-t border-gray-800">
+    <span>&copy; {{ currentYear }} Workout Tracker. Tous droits réservés.</span>
+  </footer>
+</main>

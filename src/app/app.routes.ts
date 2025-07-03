@@ -32,6 +32,16 @@ export const routes: Routes = [
   loadComponent: () =>
     import('./pages/workout/workout-detail/workout-detail.component')
       .then(m => m.WorkoutDetailComponent)
+},
+{
+  path: 'workouts/:id/edit',
+  loadComponent: () => import('./pages/workout/workout-edit/workout-edit.component').then(m => m.WorkoutEditComponent),
+  canActivate: [AuthGuard]
+},
+{
+  path: 'progress',
+  loadComponent: () => import('./pages/progress/progress.page').then(m => m.ProgressPage),
+  canActivate: [AuthGuard]
 }
 
 

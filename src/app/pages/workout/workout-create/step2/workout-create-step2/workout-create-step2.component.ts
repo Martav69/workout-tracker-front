@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ExerciseService } from '../../../../../core/exercise.service';
 import { forkJoin } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { ToastService } from 'ngx-french-toast';
 
 @Component({
   standalone: true,
@@ -22,7 +23,8 @@ export class WorkoutCreateStep2Component implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private exerciseService: ExerciseService,
-    private router: Router
+    private router: Router,
+    private toast: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -47,14 +49,17 @@ export class WorkoutCreateStep2Component implements OnInit {
         weight: [0, [Validators.required, Validators.min(0)]]
       })
     );
+    this.toast.info({ title: 'Exercice ajouté', content: 'Nouvel exercice ajouté.' });
   }
 
   removeExercise(index: number): void {
     this.exercises.removeAt(index);
+    this.toast.warning({ title: 'Exercice supprimé', content: 'Exercice retiré du programme.' });
   }
 
   saveAll(): void {
     if (this.exercises.length === 0) {
+      this.toast.danger({ title: 'Erreur', content: 'Ajoutez au moins un exercice.' });
       return;
     }
     this.loading = true;
@@ -64,12 +69,12 @@ export class WorkoutCreateStep2Component implements OnInit {
     forkJoin(calls).subscribe({
       next: () => {
         this.loading = false;
-        // TODO: ajouter un toast ou feedback visuel ici
+        this.toast.success({ title: 'Succès', content: 'Exercices enregistrés !' });
         this.router.navigate(['/workouts']);
       },
       error: () => {
         this.loading = false;
-        // TODO: ajouter un toast d'erreur ici
+        this.toast.danger({ title: 'Erreur', content: 'Erreur lors de l\'enregistrement.' });
       }
     });
   }

@@ -29,4 +29,9 @@ export class WorkoutService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API}/${id}`);
   }
+
+  partialUpdate(id: number, updates: Partial<WorkoutDTO>): Observable<WorkoutDTO> {
+    return this.http.patch<WorkoutDTO>(`${this.API}/${id}`, updates);
+  }
+
 }

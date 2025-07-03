@@ -1,31 +1,39 @@
-<div class="container">
-  <!-- Stepper -->
-  <div class="stepper">
-    <span class="step active">Étape 1</span>
-    <span class="divider active"></span>
-    <span class="step">Étape 2</span>
+<section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 p-6">
+  <div class="w-full max-w-xl bg-gray-900/80 backdrop-blur-md border border-gray-800 rounded-2xl shadow-2xl p-8 relative overflow-hidden">
+    <div class="absolute -inset-1 bg-gradient-to-tr from-blue-500/40 via-violet-500/30 to-emerald-500/40 rounded-2xl blur-xl opacity-60 animate-gradient-x z-0"></div>
+    <div class="relative z-10">
+      <!-- Stepper -->
+      <div class="flex items-center justify-center mb-8">
+        <span class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-blue-400 text-blue-400 font-bold bg-gray-950">1</span>
+        <span class="flex-1 h-1 bg-blue-400 mx-2 rounded-full"></span>
+        <span class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-gray-600 text-gray-400 font-bold bg-gray-950">2</span>
+      </div>
+      <h2 class="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 via-violet-400 to-emerald-400 bg-clip-text text-transparent drop-shadow">Créer une nouvelle séance</h2>
+      <form [formGroup]="form" (ngSubmit)="onNext()" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1">Nom</label>
+          <input formControlName="name" class="w-full px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1">Date</label>
+          <input type="date" formControlName="date" class="w-full px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1">Durée (min)</label>
+          <input type="number" formControlName="durationMinutes" class="w-full px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1">Notes</label>
+          <textarea formControlName="notes" class="w-full px-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+        </div>
+        <button
+          type="submit"
+          class="w-full py-3 rounded-lg font-bold bg-gradient-to-r from-blue-500 via-violet-500 to-emerald-500 text-white shadow-lg hover:scale-[1.02] transition-transform disabled:opacity-60"
+          [disabled]="form.invalid"
+        >
+          Suivant →
+        </button>
+      </form>
+    </div>
   </div>
-
-  <h2>Créer une nouvelle séance</h2>
-  <form [formGroup]="form" (ngSubmit)="onNext()">
-    <label>Nom</label>
-    <input formControlName="name" class="input" />
-
-    <label>Date</label>
-    <input type="date" formControlName="date" class="input" />
-
-    <label>Durée (min)</label>
-    <input type="number" formControlName="durationMinutes" class="input" />
-
-    <label>Notes</label>
-    <textarea formControlName="notes" class="input"></textarea>
-
-    <button
-      type="submit"
-      class="btn-primary"
-      [disabled]="form.invalid"
-    >
-      Suivant →
-    </button>
-  </form>
-</div>
+</section> 

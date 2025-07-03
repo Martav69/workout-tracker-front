@@ -1,0 +1,62 @@
+section {
+  margin: 0 auto;
+}
+
+.bg-white {
+  background: #fff;
+}
+
+.rounded-lg {
+  border-radius: 1rem;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 25px rgba(30,64,175,0.08), 0 1.5px 4px rgba(0,0,0,0.04);
+}
+
+// Animate gradient border
+@keyframes gradient-x {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 6s ease-in-out infinite;
+  background-size: 200% 200%;
+}
+
+// Responsive grid tweaks
+.grid {
+  display: grid;
+  gap: 2.5rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Card polish
+.glass-card-dark {
+  @apply bg-gray-900/70 backdrop-blur-md border border-gray-800 rounded-2xl shadow-2xl p-8;
+  transition: transform 0.6s cubic-bezier(0.4,0,0.2,1), opacity 0.6s cubic-bezier(0.4,0,0.2,1);
+  transform: translateY(30px);
+  position: relative;
+  overflow: hidden;
+}
+
+.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+} 

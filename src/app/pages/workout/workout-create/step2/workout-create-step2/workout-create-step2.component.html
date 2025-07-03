@@ -1,51 +1,55 @@
-<div class="container">
-  <!-- On bind tout le formGroup parent -->
-  <form [formGroup]="form">
-    <!-- Stepper -->
-    <div class="stepper">
-      <span class="step">Étape 1</span>
-      <span class="divider active"></span>
-      <span class="step active">Étape 2</span>
-    </div>
-
-    <h2>Ajouter des exercices</h2>
-
-    <button type="button" class="btn-secondary" (click)="addExercise()">
-      + Ajouter un exercice
-    </button>
-
-    <!-- On déclare qu’on travaille sur le FormArray "exercises" -->
-    <div formArrayName="exercises">
-      <!-- Puis pour chaque index i dans exercises.controls, on utilise formGroupName -->
-      <div
-        *ngFor="let _, let i = index of exercises.controls"
-        [formGroupName]="i"
-        class="exercise-card"
-      >
-        <label>Nom</label>
-        <input formControlName="name" class="input" />
-
-        <label>Séries</label>
-        <input type="number" formControlName="sets" class="input" />
-
-        <label>Répétitions</label>
-        <input type="number" formControlName="reps" class="input" />
-
-        <label>Poids</label>
-        <input type="number" formControlName="weight" class="input" />
-
-        <button type="button" class="btn-danger" (click)="removeExercise(i)">
-          Supprimer
-        </button>
+<section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 p-6">
+  <div class="w-full max-w-xl glass-card-dark border border-gray-800 rounded-2xl shadow-2xl p-8 relative overflow-hidden">
+    <div class="absolute -inset-1 bg-gradient-to-tr from-blue-500/40 via-violet-500/30 to-emerald-500/40 rounded-2xl blur-xl opacity-60 animate-gradient-x z-0"></div>
+    <div class="relative z-10">
+      <!-- Stepper -->
+      <div class="flex items-center justify-center mb-8">
+        <span class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-blue-400 text-blue-400 font-bold bg-gray-950">1</span>
+        <span class="flex-1 h-1 bg-blue-400 mx-2 rounded-full"></span>
+        <span class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-blue-400 text-blue-400 font-bold bg-gray-950">2</span>
       </div>
+      <h2 class="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 via-violet-400 to-emerald-400 bg-clip-text text-transparent drop-shadow">Ajouter des exercices</h2>
+      <form [formGroup]="form" class="space-y-4">
+        <button type="button" class="w-full py-2 rounded-lg font-bold bg-gradient-to-r from-gray-800 via-gray-700 to-gray-900 text-blue-400 shadow hover:scale-[1.02] transition mb-2" (click)="addExercise()">
+          + Ajouter un exercice
+        </button>
+        <div formArrayName="exercises" class="space-y-4">
+          <div
+            *ngFor="let _, let i = index of exercises.controls"
+            [formGroupName]="i"
+            class="exercise-card bg-gray-800/80 border border-gray-700 rounded-xl p-4 flex flex-col gap-2 relative shadow group"
+          >
+            <button type="button" class="absolute top-2 right-2 text-red-400 hover:text-white transition" (click)="removeExercise(i)" title="Supprimer">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">Nom</label>
+                <input formControlName="name" class="input bg-gray-900 text-white border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">Séries</label>
+                <input type="number" formControlName="sets" class="input bg-gray-900 text-white border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">Répétitions</label>
+                <input type="number" formControlName="reps" class="input bg-gray-900 text-white border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">Poids</label>
+                <input type="number" formControlName="weight" class="input bg-gray-900 text-white border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          class="w-full py-3 rounded-lg font-bold bg-gradient-to-r from-blue-500 via-violet-500 to-emerald-500 text-white shadow-lg hover:scale-[1.02] transition-transform disabled:opacity-60"
+          (click)="saveAll()"
+          [disabled]="exercises.length === 0 || loading"
+        >
+          {{ loading ? 'Enregistrement…' : 'Terminer la séance' }}
+        </button>
+      </form>
     </div>
-
-    <button
-      class="btn-primary finish-btn"
-      (click)="saveAll()"
-      [disabled]="exercises.length === 0 || loading"
-    >
-      {{ loading ? 'Enregistrement…' : 'Terminer la séance' }}
-    </button>
-  </form>
-</div>
+  </div>
+</section> 

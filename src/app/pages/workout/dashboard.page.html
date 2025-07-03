@@ -1,9 +1,13 @@
-<div class="p-8">
-  <h1 class="text-3xl font-bold mb-4">Bienvenue sur ton Dashboard 🏋️‍♂️</h1>
-  <p class="mb-6">Que veux-tu faire aujourd'hui ?</p>
+<main class="min-h-screen flex flex-col bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white">
 
-  <div class="flex gap-4">
-    <a routerLink="/workouts" class="btn">Voir mes séances</a>
-    <a routerLink="/workouts/create" class="btn">Créer une séance</a>
-  </div>
-</div>
+
+  <!-- Dashboard Content -->
+  <section class="flex-1 flex flex-col justify-center items-center text-center px-6 py-16">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Bienvenue sur ton Dashboard <span aria-hidden="true">🏋️‍♂️</span></h1>
+    <p class="mb-8 text-lg text-gray-300">Que veux-tu faire aujourd'hui ?</p>
+    <div class="flex flex-col md:flex-row gap-6 justify-center">
+      <a routerLink="/workouts" class="btn-dashboard-cta">Voir mes séances</a>
+      <a routerLink="/workouts/create" class="btn-dashboard-cta">Créer une séance</a>
+    </div>
+  </section>
+</main>

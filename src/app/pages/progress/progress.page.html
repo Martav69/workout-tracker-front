@@ -1,0 +1,71 @@
+<section class="p-8 min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white w-full">
+  <h1 class="text-4xl font-extrabold mb-12 text-center animate-fade-in tracking-tight bg-gradient-to-r from-blue-400 via-violet-400 to-emerald-400 bg-clip-text text-transparent drop-shadow-lg">Progression</h1>
+  <div class="w-full grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+    <div class="glass-card-dark border border-gray-800 rounded-2xl shadow-2xl p-8 flex flex-col items-center relative overflow-hidden group">
+      <div class="absolute -inset-1 bg-gradient-to-tr from-blue-500/40 via-violet-500/30 to-emerald-500/40 rounded-2xl blur-xl opacity-60 group-hover:opacity-80 transition-opacity z-0 animate-gradient-x"></div>
+      <div class="relative z-10 w-full flex flex-col items-center">
+        <h2 class="text-xl font-semibold mb-4 text-blue-400 drop-shadow">Fréquence des séances</h2>
+        <ngx-charts-line-chart
+          *ngIf="workoutFrequencyData?.length; else noData1"
+          [results]="workoutFrequencyData"
+          [scheme]="colorScheme"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="false"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          xAxisLabel="Date"
+          yAxisLabel="Séances"
+          [animations]="true"
+          [autoScale]="true"
+          class="w-full h-64"
+        ></ngx-charts-line-chart>
+        <ng-template #noData1>
+          <p class="text-gray-400 italic">Aucune donnée pour le moment.</p>
+        </ng-template>
+      </div>
+    </div>
+    <div class="glass-card-dark border border-gray-800 rounded-2xl shadow-2xl p-8 flex flex-col items-center relative overflow-hidden group">
+      <div class="absolute -inset-1 bg-gradient-to-tr from-violet-500/40 via-blue-500/30 to-emerald-500/40 rounded-2xl blur-xl opacity-60 group-hover:opacity-80 transition-opacity z-0 animate-gradient-x"></div>
+      <div class="relative z-10 w-full flex flex-col items-center">
+        <h2 class="text-xl font-semibold mb-4 text-violet-400 drop-shadow">Répartition des exercices</h2>
+        <ngx-charts-pie-chart
+          *ngIf="exerciseDistributionData?.length; else noData2"
+          [results]="exerciseDistributionData"
+          [scheme]="colorScheme"
+          [legend]="true"
+          [doughnut]="true"
+          [animations]="true"
+          class="w-full h-64"
+        ></ngx-charts-pie-chart>
+        <ng-template #noData2>
+          <p class="text-gray-400 italic">Aucune donnée pour le moment.</p>
+        </ng-template>
+      </div>
+    </div>
+    <div class="glass-card-dark border border-gray-800 rounded-2xl shadow-2xl p-8 flex flex-col items-center relative overflow-hidden group">
+      <div class="absolute -inset-1 bg-gradient-to-tr from-emerald-500/40 via-blue-500/30 to-violet-500/40 rounded-2xl blur-xl opacity-60 group-hover:opacity-80 transition-opacity z-0 animate-gradient-x"></div>
+      <div class="relative z-10 w-full flex flex-col items-center">
+        <h2 class="text-xl font-semibold mb-4 text-emerald-400 drop-shadow">Progression des PR</h2>
+        <ngx-charts-area-chart
+          *ngIf="prProgressionData?.length; else noData3"
+          [results]="prProgressionData"
+          [scheme]="colorScheme"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="false"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          xAxisLabel="Date"
+          yAxisLabel="Poids (kg)"
+          [animations]="true"
+          [autoScale]="true"
+          class="w-full h-64"
+        ></ngx-charts-area-chart>
+        <ng-template #noData3>
+          <p class="text-gray-400 italic">Aucune donnée pour le moment.</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</section> 

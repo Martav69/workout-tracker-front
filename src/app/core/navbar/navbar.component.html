@@ -1,34 +1,46 @@
-<nav class="bg-white shadow-md">
+<nav *ngIf="!isHomeRoute()" class="sticky top-0 z-50 bg-gray-950/90 backdrop-blur-md shadow-md border-b border-gray-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-    <!-- Logo / titre -->
-    <div class="flex-shrink-0">
-      <a routerLink="/" class="text-xl font-bold">WorkoutTracker</a>
+    <!-- Logo / Title -->
+    <a routerLink="/" class="flex items-center gap-2 flex-shrink-0 group" aria-label="Accueil Workout Tracker">
+      <div class="w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-tr from-blue-600 to-violet-600 text-white font-bold text-lg shadow-lg">WT</div>
+      <span class="text-2xl font-extrabold tracking-tight text-white group-hover:text-blue-400 transition-colors select-none">WorkoutTracker</span>
+    </a>
+
+    <!-- Desktop Links -->
+    <div class="hidden md:flex gap-2 items-center">
+      <a routerLink="/workouts" routerLinkActive="font-semibold" class="nav-link">Dashboard</a>
+      <a routerLink="/workouts/create" routerLinkActive="font-semibold" class="nav-link">Créer séance</a>
+      <a routerLink="/progress" routerLinkActive="font-semibold" class="nav-link">Progression</a>
     </div>
 
-    <!-- Liens desktop -->
-    <div class="hidden md:flex space-x-4 items-center">
-      <a routerLink="/workouts" routerLinkActive="font-semibold" class="px-3 py-2 rounded hover:bg-gray-100">Dashboard</a>
-      <a routerLink="/workouts/create" routerLinkActive="font-semibold" class="px-3 py-2 rounded hover:bg-gray-100">Créer séance</a>
+    <!-- User / Logout Desktop -->
+    <div class="hidden md:flex items-center gap-2">
+      <span class="px-3 py-2 text-gray-300">{{ user?.sub }}</span>
+      <button (click)="logout()" class="nav-btn-logout">Déconnexion</button>
+      <!-- Dark mode toggle placeholder -->
+      <button aria-label="Toggle dark mode" class="ml-2 nav-btn-icon">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+      </button>
     </div>
 
-    <!-- Utilisateur / logout desktop -->
-    <div class="hidden md:flex items-center space-x-2">
-      <span class="px-3 py-2">{{ user?.sub }}</span>
-      <button (click)="logout()" class="px-3 py-2 rounded hover:bg-red-100 text-red-600">Déconnexion</button>
-    </div>
-
-    <!-- Hamburger mobile -->
-    <button class="md:hidden" (click)="toggleMenu()">
-      <svg class="h-6 w-6" fill="none" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    <!-- Hamburger Mobile -->
+    <button class="md:hidden nav-btn-icon p-2" (click)="toggleMenu()" aria-label="Menu">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
     </button>
   </div>
 
-  <!-- Menu mobile -->
-  <div *ngIf="menuOpen" class="md:hidden bg-white border-t border-gray-200">
-    <a routerLink="/workouts" (click)="toggleMenu()" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
-    <a routerLink="/workouts/create" (click)="toggleMenu()" class="block px-4 py-2 hover:bg-gray-100">Créer séance</a>
-    <div class="border-t my-1"></div>
-    <span class="block px-4 py-2">{{ user?.sub }}</span>
-    <button (click)="logout()" class="w-full text-left px-4 py-2 hover:bg-red-100 text-red-600">Déconnexion</button>
+  <!-- Mobile Menu -->
+  <div *ngIf="menuOpen" class="md:hidden bg-gray-950/95 border-t border-gray-800 shadow animate-fade-in">
+    <a routerLink="/workouts" (click)="toggleMenu()" class="block nav-link w-full text-left px-4 py-2">Dashboard</a>
+    <a routerLink="/workouts/create" (click)="toggleMenu()" class="block nav-link w-full text-left px-4 py-2">Créer séance</a>
+    <a routerLink="/progress" (click)="toggleMenu()" class="block nav-link w-full text-left px-4 py-2">Progression</a>
+    <div class="border-t my-1 border-gray-800"></div>
+    <span class="block px-4 py-2 text-gray-300">{{ user?.sub }}</span>
+    <button (click)="logout(); toggleMenu()" class="w-full text-left nav-btn-logout px-4 py-2">Déconnexion</button>
+    <!-- Dark mode toggle placeholder -->
+    <button aria-label="Toggle dark mode" class="w-full text-left nav-btn-icon px-4 py-2">
+      <svg class="w-5 h-5 inline" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+      <span class="ml-2">Mode sombre</span>
+    </button>
   </div>
 </nav>

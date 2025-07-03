@@ -1,24 +1,41 @@
-<div class="container mx-auto p-4" *ngIf="workout">
-  <h2 class="text-2xl font-bold mb-2">{{ workout.name }}</h2>
-  <p class="mb-4">{{ workout.date | date:'fullDate' }} • {{ workout.durationMinutes }} min</p>
-  <div *ngIf="workout.notes" class="mb-4 italic text-gray-600">
-    {{ workout.notes }}
+<section class="p-8 min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white">
+  <div class="max-w-3xl mx-auto">
+    <div class="glass-card-dark border border-gray-800 rounded-xl shadow-lg p-8 mb-8">
+      <h1 class="text-3xl font-bold mb-4">Détail de la séance</h1>
+      <div *ngIf="workout">
+        <h2 class="text-2xl font-semibold mb-2 text-blue-400">{{ workout.name }}</h2>
+        <p class="text-gray-400 mb-4">Durée : {{ workout.durationMinutes }} minutes</p>
+        <div class="flex gap-2 mb-4">
+          <button (click)="edit()" class="rounded-full p-2 bg-gray-800 hover:bg-blue-700 text-blue-400 hover:text-white transition" title="Modifier la séance">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536M9 11l6 6M3 21h6l11.293-11.293a1 1 0 0 0 0-1.414l-4.586-4.586a1 1 0 0 0-1.414 0L3 15v6z"/></svg>
+          </button>
+          <button (click)="delete()" class="rounded-full p-2 bg-gray-800 hover:bg-red-700 text-red-400 hover:text-white transition" title="Supprimer la séance">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12zm2-12V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          </button>
+        </div>
+        <h3 class="text-xl font-semibold mb-2 mt-6 text-white">Exercices</h3>
+        <div *ngIf="workout.exercises?.length; else noExercises">
+          <ul class="space-y-4">
+            <li *ngFor="let ex of workout.exercises" class="glass-card-dark border border-gray-800 rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between">
+              <div>
+                <span class="font-semibold text-blue-300">{{ ex.name }}</span>
+                <span class="ml-2 text-gray-400">{{ ex.sets }} séries x {{ ex.reps }} reps</span>
+              </div>
+              <div class="flex gap-2 mt-2 md:mt-0">
+                <button (click)="editExercise(ex)" class="rounded-full p-2 bg-gray-800 hover:bg-blue-700 text-blue-400 hover:text-white transition" title="Modifier l'exercice">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536M9 11l6 6M3 21h6l11.293-11.293a1 1 0 0 0 0-1.414l-4.586-4.586a1 1 0 0 0-1.414 0L3 15v6z"/></svg>
+                </button>
+                <button (click)="deleteExercise(ex)" class="rounded-full p-2 bg-gray-800 hover:bg-red-700 text-red-400 hover:text-white transition" title="Supprimer l'exercice">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12zm2-12V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <ng-template #noExercises>
+          <p class="text-gray-400 italic mt-4">Aucun exercice pour cette séance.</p>
+        </ng-template>
+      </div>
+    </div>
   </div>
-
-  <h3 class="text-xl font-semibold mb-2">Exercices</h3>
-  <ul *ngIf="workout.exercises.length; else noEx">
-      <li *ngFor="let ex of workout.exercises" class="mb-2">
-    {{ ex.name }}
-    – {{ ex.sets }}×{{ ex.reps }}
-    &#64; {{ ex.weight }} kg
-  </li>
-  </ul>
-  <ng-template #noEx>
-    <p class="text-gray-500">Aucun exercice pour cette séance.</p>
-  </ng-template>
-
-  <div class="mt-6 flex space-x-2">
-    <button (click)="edit()" class="btn-secondary">✏️ Éditer</button>
-    <button (click)="delete()" class="btn-danger">🗑️ Supprimer</button>
-  </div>
-</div>
+</section>
