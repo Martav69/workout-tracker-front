@@ -15,12 +15,13 @@
 
     <!-- User / Logout Desktop -->
     <div class="hidden md:flex items-center gap-2">
-      <span class="px-3 py-2 text-gray-300">{{ user?.sub }}</span>
-      <button (click)="logout()" class="nav-btn-logout">Déconnexion</button>
-      <!-- Dark mode toggle placeholder -->
-      <button aria-label="Toggle dark mode" class="ml-2 nav-btn-icon">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-      </button>
+      <ng-container *ngIf="user$ | async as user; else loginBtn">
+        <span class="px-3 py-2 text-gray-300">{{ user.sub }}</span>
+        <button (click)="logout()" class="nav-btn-logout">Déconnexion</button>
+      </ng-container>
+      <ng-template #loginBtn>
+        <button (click)="router.navigate(['/login'])" class="px-5 py-2 rounded-lg font-semibold shadow-sm bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-2 focus-visible:ring-blue-400 focus:outline-none transition">Connexion</button>
+      </ng-template>
     </div>
 
     <!-- Hamburger Mobile -->
@@ -35,12 +36,12 @@
     <a routerLink="/workouts/create" (click)="toggleMenu()" class="block nav-link w-full text-left px-4 py-2">Créer séance</a>
     <a routerLink="/progress" (click)="toggleMenu()" class="block nav-link w-full text-left px-4 py-2">Progression</a>
     <div class="border-t my-1 border-gray-800"></div>
-    <span class="block px-4 py-2 text-gray-300">{{ user?.sub }}</span>
-    <button (click)="logout(); toggleMenu()" class="w-full text-left nav-btn-logout px-4 py-2">Déconnexion</button>
-    <!-- Dark mode toggle placeholder -->
-    <button aria-label="Toggle dark mode" class="w-full text-left nav-btn-icon px-4 py-2">
-      <svg class="w-5 h-5 inline" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.07l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.93l-.71-.71" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-      <span class="ml-2">Mode sombre</span>
-    </button>
+    <ng-container *ngIf="user$ | async as user; else loginBtnMobile">
+      <span class="block px-4 py-2 text-gray-300">{{ user.sub }}</span>
+      <button (click)="logout(); toggleMenu()" class="w-full text-left nav-btn-logout px-4 py-2">Déconnexion</button>
+    </ng-container>
+    <ng-template #loginBtnMobile>
+      <button (click)="router.navigate(['/login']); toggleMenu()" class="w-full text-left nav-btn-login px-4 py-2">Connexion</button>
+    </ng-template>
   </div>
 </nav>

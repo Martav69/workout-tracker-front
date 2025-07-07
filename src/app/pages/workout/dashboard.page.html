@@ -7,7 +7,9 @@
     <p class="mb-8 text-lg text-gray-300">Que veux-tu faire aujourd'hui ?</p>
     <div class="flex flex-col md:flex-row gap-6 justify-center">
       <a routerLink="/workouts" class="btn-dashboard-cta">Voir mes séances</a>
-      <a routerLink="/workouts/create" class="btn-dashboard-cta">Créer une séance</a>
+      <ng-container *ngIf="user$ | async">
+        <a routerLink="/workouts/create" class="btn-dashboard-cta">Créer une séance</a>
+      </ng-container>
     </div>
   </section>
 </main>

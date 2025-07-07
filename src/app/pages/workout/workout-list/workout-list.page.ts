@@ -48,4 +48,8 @@ export class WorkoutListPage implements OnInit {
       });
     }
   }
+
+  createWorkout() {
+    this.router.navigate(['/workouts/create']);
+  }
 }

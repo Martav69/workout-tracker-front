@@ -11,6 +11,11 @@ interface LoginForm {
   password: string;
 }
 
+interface RegisterForm {
+  username: string;
+  password: string;
+}
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -23,6 +28,15 @@ export class LoginPage implements OnInit {
     username: '',
     password: ''
   };
+
+  registerData: RegisterForm = {
+    username: '',
+    password: ''
+  };
+
+  showRegister = false;
+  registerError: string | null = null;
+  registerSuccess: boolean = false;
 
   constructor(private auth: AuthService, private router: Router) {}
 
@@ -37,6 +51,22 @@ export class LoginPage implements OnInit {
       this.auth.login(this.formData).subscribe({
         next: () => {},
         error: (err) => console.error(err)
+      });
+    }
+  }
+
+  onRegister(form: NgForm): void {
+    if (form.valid) {
+      this.auth.register(this.registerData).subscribe({
+        next: () => {
+          this.registerSuccess = true;
+          this.registerError = null;
+          this.showRegister = false;
+        },
+        error: (err) => {
+          this.registerError = err.error?.message || 'Erreur lors de la création du compte.';
+          this.registerSuccess = false;
+        }
       });
     }
   }

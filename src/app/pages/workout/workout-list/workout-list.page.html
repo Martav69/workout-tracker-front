@@ -32,7 +32,10 @@
   <ng-template #noWorkouts>
     <div class="flex flex-col items-center justify-center py-20 animate-fade-in">
       <svg class="w-16 h-16 text-gray-700 mb-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
-      <p class="text-gray-400 italic">Aucun entraînement pour le moment.</p>
+      <p class="text-gray-400 italic mb-4">Aucun entraînement pour le moment.</p>
+      <button (click)="createWorkout()" class="mt-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 via-violet-500 to-emerald-500 text-white font-bold text-lg shadow-lg hover:scale-105 transition-transform focus:outline-none focus:ring-2 focus:ring-blue-400">
+        + Créer une séance
+      </button>
     </div>
   </ng-template>
 </section>

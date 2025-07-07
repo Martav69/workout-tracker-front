@@ -1,20 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { NgxChartsModule, LineChartModule, PieChartModule, AreaChartModule } from '@swimlane/ngx-charts';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { WorkoutService } from '../../core/workout.service';
 import { WorkoutDTO, ExerciseDTO } from '../../shared/models/models';
 
 @Component({
   selector: 'app-progress-page',
   standalone: true,
-  imports: [NgxChartsModule, LineChartModule, PieChartModule, AreaChartModule],
+  imports: [NgxChartsModule],
   templateUrl: './progress.page.html',
   styleUrls: ['./progress.page.scss']
 })
 export class ProgressPage implements OnInit {
   workouts: WorkoutDTO[] = [];
 
-  // Chart 1: Workout frequency over last 30 days
-  workoutFrequencyData: { name: string; value: number }[] = [];
+
+  // Chart 1: Workout frequency over last 30 days (for calendar heatmap)
+  workoutFrequencyCalendarData: { name: string; series: { name: string; value: number }[] }[] = [];
+
   // Chart 2: Pie chart of exercise types
   exerciseTypeData: { name: string; value: number }[] = [];
   // Chart 3: Area chart of max weight per exercise over time
@@ -40,17 +42,21 @@ export class ProgressPage implements OnInit {
       },
       error: () => {
         this.workouts = [];
-        this.workoutFrequencyData = [];
+        this.workoutFrequencyCalendarData = [];
         this.exerciseTypeData = [];
         this.prProgressionData = [];
       }
     });
   }
 
-  // Chart 1: Workout frequency (last 30 days)
+  get currentYear() {
+    return new Date().getFullYear();
+  }
+
+  // Chart 1: Workout frequency (calendar heatmap)
   computeWorkoutFrequency() {
     const days: { [date: string]: number } = {};
-    for (let i = 29; i >= 0; i--) {
+    for (let i = 0; i < 365; i++) {
       const d = new Date();
       d.setDate(d.getDate() - i);
       const key = d.toISOString().slice(0, 10);
@@ -61,10 +67,19 @@ export class ProgressPage implements OnInit {
       const key = w.date.slice(0, 10);
       if (days[key] !== undefined) days[key]++;
     });
-    this.workoutFrequencyData = Object.entries(days)
+    const series = Object.entries(days)
       .map(([name, value]) => ({ name, value }))
-      .filter(d => typeof d.value === 'number' && !isNaN(d.value));
+      .filter(d => typeof d.value === 'number' && !isNaN(d.value))
+      .sort((a, b) => a.name.localeCompare(b.name));
+    this.workoutFrequencyCalendarData = [
+      {
+        name: this.currentYear.toString(),
+        series: series
+      }
+    ];
   }
+  
+  
 
   // Chart 2: Exercise type distribution (pie)
   computeExerciseTypeDistribution() {

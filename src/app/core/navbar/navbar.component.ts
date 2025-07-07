@@ -18,9 +18,7 @@ export class NavbarComponent {
 
   menuOpen = false;
 
-    get user() {
-    return this.auth.user;
-  }
+  user$ = this.auth.user$;
 
   isHomeRoute() {
     return this.router.url === '/';
